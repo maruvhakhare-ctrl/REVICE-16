@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LET'S STUDY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section id="auth-view" class="auth-view">
+      <div class="auth-copy">
+        <div class="brand-mark"><span>LS</span> LET'S STUDY</div>
+        <p class="eyebrow">A calmer way to keep moving</p>
+        <h1>Make room for<br><em>your next win.</em></h1>
+        <p class="intro">Build a study rhythm that fits your week, then let Let's Study keep you company while you learn.</p>
+        <div class="mini-proof"><span class="proof-dot"></span><strong>Small sessions compound.</strong> Your streak starts today.</div>
+      </div>
+      <div class="setup-card">
+        <div class="step-label">01 / YOUR SPACE</div>
+        <h2>Let's set up<br>your study space.</h2>
+        <p class="muted">Your plan stays on this device, ready whenever you are.</p>
+        <form id="setup-form">
+          <label>What should we call you?<input id="name" type="text" placeholder="Your first name" required></label>
+          <label>Choose your grade<select id="grade" required><option value="" disabled selected>Select grade</option><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option><option>Grade 10</option><option>Grade 11</option><option>Grade 12</option></select></label>
+          <button class="primary-button" type="submit">Build my space <span>→</span></button>
+        </form>
+        <p class="privacy-note">✦ Saved privately in your browser</p>
+      </div>
+    </section>
+
+    <section id="planner-view" class="planner-view hidden">
+      <aside class="sidebar">
+        <div class="brand-mark"><span>LS</span> LET'S STUDY</div>
+        <div class="profile"><div id="avatar" class="avatar">M</div><div><strong id="profile-name">Learner</strong><small id="profile-grade">Grade 7</small></div><button id="reset-button" class="icon-button" title="Reset profile">↗</button></div>
+        <nav><button class="nav-item active" data-view="today"><span>◷</span> Today</button><button class="nav-item" data-view="timetable"><span>▦</span> Timetable</button><button class="nav-item" data-view="progress"><span>↗</span> Progress</button></nav>
+        <div class="sidebar-footer"><div class="fire-pet" id="fire-pet" aria-label="Fire pet streak companion" title="Your fire pet grows brighter as your streak increases"><div class="fire-pet-flame"><i></i><b></b></div><strong id="fire-pet-name">Ember</strong><small id="fire-pet-streak">0 day streak</small></div><div class="orbit-note"><span>✦</span><p><strong>Keep your orbit.</strong><br>Consistency beats intensity.</p></div></div>
+      </aside>
+      <div class="content-area">
+        <header class="topbar"><div><p id="date-label" class="eyebrow">MONDAY, 21 AUGUST</p><h1 id="greeting">Good morning.</h1></div><div class="header-actions"><div class="diamond-chip" title="Diamonds earned"><span>◆</span><strong id="diamond-count">0</strong><small>diamonds</small></div><label class="theme-picker" title="Change theme"><span>Theme</span><select id="theme-select" aria-label="Change theme"><option value="meadow">Meadow</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option></select></label><button id="edit-plan" class="text-button">Edit plan</button><div class="streak-chip"><span>✦</span><strong id="streak-count">0</strong><small>day streak</small></div></div></header>
+        <div id="today-view" class="page-view">
+          <div class="hero-strip"><div><span class="tag">YOUR FOCUS</span><h2>Two focused sessions.<br><em>A lighter day ahead.</em></h2></div><div class="ring-wrap"><div class="progress-ring"><span id="daily-percent">0%</span></div><small>daily goal</small></div></div>
+          <div class="section-heading"><div><p class="eyebrow">YOUR PLAN</p><h2>Today's orbit</h2></div><span id="session-summary" class="muted">0 of 2 sessions complete</span></div>
+          <div id="session-list" class="session-list"></div>
+        </div>
+        <div id="timetable-view" class="page-view hidden"><div class="section-heading"><div><p class="eyebrow">THE BIG PICTURE</p><h2>Your weekly rhythm</h2></div><button id="edit-plan-two" class="primary-button small">Edit schedule <span>→</span></button></div><div id="week-grid" class="week-grid"></div></div>
+        <div id="progress-view" class="page-view hidden"><div class="section-heading"><div><p class="eyebrow">KEEP GOING</p><h2>Your progress</h2></div></div><div class="progress-grid"><div class="stat-card diamond-card"><span class="stat-icon">◆</span><strong id="progress-diamonds">0</strong><p>diamonds earned</p><small>100 diamonds for every completed task.</small></div><div class="stat-card accent"><span class="stat-icon">✦</span><strong id="progress-streak">0</strong><p>day streak</p><small>Best habit is the one you repeat.</small></div><div class="stat-card"><span class="stat-icon">◷</span><strong id="total-minutes">0</strong><p>minutes focused</p><small>Every minute counts toward your future.</small></div><div class="stat-card"><span class="stat-icon">✓</span><strong id="total-sessions">0</strong><p>sessions completed</p><small>You showed up for yourself.</small></div></div><div class="quote-panel">“The secret of getting ahead is getting started.”<small>— Mark Twain</small></div></div>
+      </div>
+    </section>
+
+    <div id="onboarding-modal" class="modal hidden"><div class="modal-card"><button class="close-modal" data-close>×</button><p class="eyebrow">02 / YOUR RHYTHM</p><h2>Shape your week.</h2><p class="muted">Pick the days and time that feel realistic. Orbit will arrange two subjects each day.</p><form id="plan-form"><fieldset><legend>Which subjects are you studying?</legend><div class="subject-grid"><label><input type="checkbox" name="subject" value="Home Language"><span>Home Language</span></label><label><input type="checkbox" name="subject" value="First Additional Language"><span>First Additional Language</span></label><label><input type="checkbox" name="subject" value="Mathematics"><span>Mathematics</span></label><label><input type="checkbox" name="subject" value="Mathematical Literacy"><span>Mathematical Literacy</span></label><label><input type="checkbox" name="subject" value="Natural Sciences"><span>Natural Sciences</span></label><label><input type="checkbox" name="subject" value="Social Sciences"><span>Social Sciences</span></label><label><input type="checkbox" name="subject" value="Life Orientation"><span>Life Orientation</span></label><label><input type="checkbox" name="subject" value="Technology"><span>Technology</span></label><label><input type="checkbox" name="subject" value="Creative Arts"><span>Creative Arts</span></label><label><input type="checkbox" name="subject" value="Economic and Management Sciences"><span>Economic and Management Sciences</span></label><label><input type="checkbox" name="subject" value="Accounting"><span>Accounting</span></label><label><input type="checkbox" name="subject" value="Business Studies"><span>Business Studies</span></label><label><input type="checkbox" name="subject" value="Economics"><span>Economics</span></label><label><input type="checkbox" name="subject" value="Geography"><span>Geography</span></label><label><input type="checkbox" name="subject" value="History"><span>History</span></label><label><input type="checkbox" name="subject" value="Life Sciences"><span>Life Sciences</span></label><label><input type="checkbox" name="subject" value="Physical Sciences"><span>Physical Sciences</span></label><label><input type="checkbox" name="subject" value="Agricultural Sciences"><span>Agricultural Sciences</span></label><label><input type="checkbox" name="subject" value="Computer Applications Technology"><span>Computer Applications Technology</span></label><label><input type="checkbox" name="subject" value="Information Technology"><span>Information Technology</span></label><label><input type="checkbox" name="subject" value="Engineering Graphics and Design"><span>Engineering Graphics and Design</span></label><label><input type="checkbox" name="subject" value="Consumer Studies"><span>Consumer Studies</span></label><label><input type="checkbox" name="subject" value="Tourism"><span>Tourism</span></label><label><input type="checkbox" name="subject" value="Dramatic Arts"><span>Dramatic Arts</span></label><label><input type="checkbox" name="subject" value="Visual Arts"><span>Visual Arts</span></label><label><input type="checkbox" name="subject" value="Music"><span>Music</span></label><label><input type="checkbox" name="subject" value="Religion Studies"><span>Religion Studies</span></label><label><input type="checkbox" name="subject" value="Additional Language"><span>Additional Language</span></label></div></fieldset><fieldset><legend>When will you study?</legend><div class="days-grid"><label><input type="checkbox" name="day" value="Monday"><span>Mon</span></label><label><input type="checkbox" name="day" value="Tuesday"><span>Tue</span></label><label><input type="checkbox" name="day" value="Wednesday"><span>Wed</span></label><label><input type="checkbox" name="day" value="Thursday"><span>Thu</span></label><label><input type="checkbox" name="day" value="Friday"><span>Fri</span></label><label><input type="checkbox" name="day" value="Saturday"><span>Sat</span></label><label><input type="checkbox" name="day" value="Sunday"><span>Sun</span></label></div><div class="form-row"><label>Session length<select id="duration"><option value="25">25 minutes</option><option value="45" selected>45 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option></select></label><label>Start time<input id="start-time" type="time" value="16:00"></label></div></fieldset><button class="primary-button" type="submit">Create my timetable <span>→</span></button></form></div></div>
+    <div id="timer-modal" class="modal hidden"><div class="timer-card"><button class="close-modal" data-close>×</button><p class="eyebrow">FOCUS MODE</p><div class="timer-subject" id="timer-subject">Mathematics</div><div id="timer-display" class="timer-display">45:00</div><div class="timer-track"><span id="timer-bar"></span></div><p id="timer-message" class="muted">Take a breath. You have got this.</p><div class="timer-actions"><button id="timer-toggle" class="primary-button">Start session <span>▶</span></button><button id="timer-complete" class="text-button">Mark complete</button></div></div></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LET'S STUDY</title>
+  <title>REVISE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app-shell">
     <section id="auth-view" class="auth-view">
       <div class="auth-copy">
-        <div class="brand-mark"><span>LS</span> LET'S STUDY</div>
+        <div class="brand-mark">REVISE</div>
         <p class="eyebrow">A calmer way to keep moving</p>
         <h1>Make room for<br><em>your next win.</em></h1>
-        <p class="intro">Build a study rhythm that fits your week, then let Let's Study keep you company while you learn.</p>
+        <p class="intro">Build a study rhythm that fits your week, then let REVISE keep you company while you learn.</p>
         <div class="mini-proof"><span class="proof-dot"></span><strong>Small sessions compound.</strong> Your streak starts today.</div>
       </div>
       <div class="setup-card">
@@ -34,10 +35,10 @@
 
     <section id="planner-view" class="planner-view hidden">
       <aside class="sidebar">
-        <div class="brand-mark"><span>LS</span> LET'S STUDY</div>
+        <div class="brand-mark">REVISE</div>
         <div class="profile"><div id="avatar" class="avatar">M</div><div><strong id="profile-name">Learner</strong><small id="profile-grade">Grade 7</small></div><button id="reset-button" class="icon-button" title="Reset profile">↗</button></div>
-        <nav><button class="nav-item active" data-view="today"><span>◷</span> Today</button><button class="nav-item" data-view="timetable"><span>▦</span> Timetable</button><button class="nav-item" data-view="progress"><span>↗</span> Progress</button></nav>
-        <div class="sidebar-footer"><div class="fire-pet" id="fire-pet" aria-label="Fire pet streak companion" title="Your fire pet grows brighter as your streak increases"><div class="fire-pet-flame"><i></i><b></b></div><strong id="fire-pet-name">Ember</strong><small id="fire-pet-streak">0 day streak</small></div><div class="orbit-note"><span>✦</span><p><strong>Keep your orbit.</strong><br>Consistency beats intensity.</p></div></div>
+        <nav><button class="nav-item active" data-view="today"><span>◷</span> Today</button><button class="nav-item" data-view="timetable"><span>▦</span> Timetable</button><button class="nav-item" data-view="profile"><span>◎</span> Profile</button></nav>
+        <div class="sidebar-footer"><div class="orbit-note"><span>✦</span><p><strong>Keep your orbit.</strong><br>Consistency beats intensity.</p></div></div>
       </aside>
       <div class="content-area">
         <header class="topbar"><div><p id="date-label" class="eyebrow">MONDAY, 21 AUGUST</p><h1 id="greeting">Good morning.</h1></div><div class="header-actions"><div class="diamond-chip" title="Diamonds earned"><span>◆</span><strong id="diamond-count">0</strong><small>diamonds</small></div><label class="theme-picker" title="Change theme"><span>Theme</span><select id="theme-select" aria-label="Change theme"><option value="meadow">Meadow</option><option value="ocean">Ocean</option><option value="sunset">Sunset</option></select></label><button id="edit-plan" class="text-button">Edit plan</button><div class="streak-chip"><span>✦</span><strong id="streak-count">0</strong><small>day streak</small></div></div></header>
@@ -47,7 +48,8 @@
           <div id="session-list" class="session-list"></div>
         </div>
         <div id="timetable-view" class="page-view hidden"><div class="section-heading"><div><p class="eyebrow">THE BIG PICTURE</p><h2>Your weekly rhythm</h2></div><button id="edit-plan-two" class="primary-button small">Edit schedule <span>→</span></button></div><div id="week-grid" class="week-grid"></div></div>
-        <div id="progress-view" class="page-view hidden"><div class="section-heading"><div><p class="eyebrow">KEEP GOING</p><h2>Your progress</h2></div></div><div class="progress-grid"><div class="stat-card diamond-card"><span class="stat-icon">◆</span><strong id="progress-diamonds">0</strong><p>diamonds earned</p><small>100 diamonds for every completed task.</small></div><div class="stat-card accent"><span class="stat-icon">✦</span><strong id="progress-streak">0</strong><p>day streak</p><small>Best habit is the one you repeat.</small></div><div class="stat-card"><span class="stat-icon">◷</span><strong id="total-minutes">0</strong><p>minutes focused</p><small>Every minute counts toward your future.</small></div><div class="stat-card"><span class="stat-icon">✓</span><strong id="total-sessions">0</strong><p>sessions completed</p><small>You showed up for yourself.</small></div></div><div class="quote-panel">“The secret of getting ahead is getting started.”<small>— Mark Twain</small></div></div>
+        <div id="progress-view" class="page-view hidden"><div class="section-heading"><div><p class="eyebrow">KEEP GOING</p><h2>Your progress</h2></div></div><div class="progress-grid"><div class="stat-card diamond-card hidden"><span class="stat-icon">◆</span><strong id="progress-diamonds">0</strong><p>diamonds earned</p><small>100 diamonds for every completed task.</small></div><div class="stat-card accent"><span class="stat-icon">✦</span><strong id="progress-streak">0</strong><p>day streak</p><small>Best habit is the one you repeat.</small></div><div class="stat-card"><span class="stat-icon">◷</span><strong id="total-minutes">0</strong><p>minutes focused</p><small>Every minute counts toward your future.</small></div><div class="stat-card"><span class="stat-icon">✓</span><strong id="total-sessions">0</strong><p>sessions completed</p><small>You showed up for yourself.</small></div></div><div class="quote-panel">“The secret of getting ahead is getting started.”<small>— Mark Twain</small></div></div>
+        <div id="profile-view" class="page-view hidden"><div class="profile-hero"><div class="profile-avatar-large" id="profile-avatar-large">M</div><div><p class="eyebrow">YOUR PROFILE</p><h2 id="profile-heading">Learner</h2></div><div class="profile-diamond-balance"><span>◆</span><strong id="profile-diamonds">0</strong><small>diamonds</small></div></div><section class="profile-section progress-section"><div class="section-heading compact"><div><p class="eyebrow">YOUR PROGRESS</p><h2>Your study rhythm</h2></div></div><div class="profile-stats"><div><strong id="profile-session-count">0</strong><span>sessions completed</span></div><div><strong id="profile-minute-count">0</strong><span>minutes focused</span></div><div><strong id="profile-streak-count">0</strong><span>day streak</span></div></div></section><section class="profile-section themes-section"><div class="section-heading compact"><div><p class="eyebrow">MAKE IT YOURS</p><h2>Themes</h2></div></div><div id="theme-gallery" class="theme-gallery"></div></section></div>
       </div>
     </section>
 

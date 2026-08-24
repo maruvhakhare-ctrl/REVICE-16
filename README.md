@@ -1,4 +1,4 @@
-# Study Orbit
+# REVISE
 
 A dependency-free study timetable organiser for learners in Grades 7 to 10.
 

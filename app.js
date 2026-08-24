@@ -18,6 +18,14 @@ const themes = [
   displayFont: index % 4 === 0 ? "'Space Grotesk', sans-serif" : index % 4 === 1 ? "Georgia, serif" : index % 4 === 2 ? "'Trebuchet MS', sans-serif" : "'Gill Sans', sans-serif",
   radius: `${6 + (index % 4) * 4}px`, shadow: index % 3 === 0 ? '0 18px 50px rgba(32,52,59,.08)' : index % 3 === 1 ? '0 12px 30px rgba(32,52,59,.14)' : '0 4px 18px rgba(32,52,59,.12)'
 }));
+const extraThemeWords = ['Aurora','Breeze','Canyon','Dawn','Dew','Eclipse','Garden','Harbor','Horizon','Lagoon','Meadow','Moon','Nova','Petal','Rain','Solstice','Spark','Tide','Twilight','Willow'];
+const extraThemeStyles = ['Glow','Mist','Bloom','Drift','Light'];
+themes.push(...Array.from({ length: 100 }, (_, index) => {
+  const hue = (index * 37 + 11) % 360;
+  const paper = `hsl(${hue} 38% 96%)`;
+  const accent = `hsl(${hue} 48% 42%)`;
+  return { id: `theme-${index + 1}`, name: `${extraThemeWords[index % 20]} ${extraThemeStyles[Math.floor(index / 20)]}`, paper, card: '#ffffff', ink: `hsl(${(hue + 180) % 360} 25% 20%)`, muted: `hsl(${hue} 12% 45%)`, accent, highlight: `hsl(${(hue + 28) % 360} 68% 62%)`, bodyFont: index % 2 ? "'Trebuchet MS', sans-serif" : "'DM Sans', sans-serif", displayFont: index % 3 ? "'Space Grotesk', sans-serif" : 'Georgia, serif', radius: `${6 + (index % 4) * 4}px`, shadow: '0 12px 30px rgba(32,52,59,.10)' };
+}));
 const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const additionalSubjects = ['Afrikaans','English','isiZulu','isiXhosa','Sepedi','Setswana','Sesotho','siSwati','Tshivenda','itsonga','isiNdebele','Agricultural Management Practices','Hospitality Studies','Dance Studies','Civil Technology','Electrical Technology','Mechanical Technology','Agricultural Technology'];
 let state = JSON.parse(localStorage.getItem(stateKey) || 'null');
@@ -72,11 +80,11 @@ function unlockTheme(themeId) {
 function renderThemeWords() {
   const theme = themes.find((item) => item.id === document.documentElement.dataset.theme) || themes[0];
   const themeName = theme.name.toLowerCase();
-  $('.hero-strip .tag').textContent = `${theme.name.toUpperCase()} MODE`;
-  $('.hero-strip h2').innerHTML = `Study in ${themeName} mode.<br><em>A ${themeName} rhythm for a brighter day.</em>`;
+  $('.hero-strip .tag').textContent = 'YOUR FOCUS';
+  $('.hero-strip h2').innerHTML = 'Two focused sessions.<br><em>A lighter day ahead.</em>';
   $('#session-summary').dataset.themeWords = themeName;
-  document.querySelectorAll('.session-subject small').forEach((label) => { if (label.textContent.includes('Ready')) label.textContent = `Ready for ${themeName} focus.`; });
-  $('.sidebar-footer strong').textContent = `Keep your ${themeName} rhythm.`;
+  document.querySelectorAll('.session-subject small').forEach((label) => { if (label.textContent.includes('Ready')) label.textContent = 'Ready when you are.'; });
+  $('.sidebar-footer strong').textContent = 'Keep your orbit.';
 }
 function renderFirePet() {
   const streak = state.streak || 0;
@@ -84,6 +92,20 @@ function renderFirePet() {
   $('#fire-pet').dataset.level = pet[0];
   $('#fire-pet-name').textContent = pet[1];
   $('#fire-pet-streak').textContent = `${streak} day${streak === 1 ? '' : 's'} streak · ${pet[2]}`;
+}
+function renderProfile() {
+  const unlockedThemes = state.unlockedThemes || ['meadow'];
+  $('#profile-avatar-large').textContent = state.name[0].toUpperCase();
+  $('#profile-heading').textContent = state.name;
+  $('#profile-diamonds').textContent = state.diamonds || 0;
+  $('#profile-session-count').textContent = (state.completed || []).length;
+  $('#profile-minute-count').textContent = state.totalMinutes || 0;
+  $('#profile-streak-count').textContent = state.streak || 0;
+  $('#theme-gallery').innerHTML = themes.map((theme) => {
+    const unlocked = unlockedThemes.includes(theme.id);
+    const selected = document.documentElement.dataset.theme === theme.id;
+    return `<button class="theme-swatch ${selected ? 'selected' : ''} ${unlocked ? '' : 'locked'}" data-theme-id="${theme.id}" style="--swatch-accent:${theme.accent};--swatch-paper:${theme.paper}" ${unlocked ? '' : `title="Unlock for ${themeUnlockCost} diamonds"`}><span></span><strong>${theme.name}</strong><small>${unlocked ? (selected ? 'Active' : 'Use theme') : `${themeUnlockCost} ◆`}</small></button>`;
+  }).join('');
 }
 function addNotificationSetting() {
   const subjectGrid = document.querySelector('.subject-grid');
@@ -200,7 +222,7 @@ function render() {
   const percent = todaySessions.length ? Math.round(todaySessions.filter((item) => completed.includes(item.key)).length / todaySessions.length * 100) : 0; $('#daily-percent').textContent = `${percent}%`; $('.progress-ring').style.background = `conic-gradient(var(--coral) ${percent * 3.6}deg, #e4f0e9 0)`;
   $('#session-list').innerHTML = todaySessions.map((item) => { const done = completed.includes(item.key); return `<article class="session-card"><div class="session-time">${formatTime(item.time)}<small>${state.duration} min focus</small></div><div class="session-subject">${item.subject}<small>${done ? 'Completed. Nice work.' : 'Ready when you are.'}</small></div><button class="session-status ${done?'done':''}" data-session="${item.key}" data-subject="${item.subject}" data-time="${item.time}">${done?'✓ Done':'Start focus'}</button></article>`; }).join('');
   renderThemeWords();
-  renderFirePet();
+  renderProfile();
   $('#week-grid').innerHTML = days.map((day) => `<div class="day-column ${day===todayName()?'today':''}"><div class="day-name">${day.slice(0,3).toUpperCase()}${day===todayName()?' · TODAY':''}</div>${schedule.filter((item)=>item.day===day).map((item)=>`<div class="day-session">${item.subject}<small>${formatTime(item.time)}</small></div>`).join('')}</div>`).join('');
 }
 function openTimer(button) { activeSession = button.dataset.session; $('#timer-subject').textContent = button.dataset.subject; timerTotal = state.duration * 60; timerSeconds = timerTotal; $('#timer-display').textContent = `${String(state.duration).padStart(2,'0')}:00`; $('#timer-message').textContent = 'Take a breath. You have got this.'; $('#timer-toggle').innerHTML = 'Start session <span>▶</span>'; openModal('#timer-modal'); }
@@ -210,6 +232,7 @@ function completeSession() { state.completed ||= []; state.diamonds ||= 0; if (!
 $('#setup-form').addEventListener('submit', (event) => { event.preventDefault(); state = { name: $('#name').value.trim(), grade: $('#grade').value, subjects: ['Mathematics','English'], subjectsPerDay:2, days: ['Monday','Tuesday','Wednesday','Thursday','Friday'], duration:45, breakMinutes:15, startTime:'16:00', completed:[], totalMinutes:0, diamonds:0, unlockedThemes:['meadow'], streak:0, remindersEnabled:false, notificationSent:{} }; save(); render(); openModal('#onboarding-modal'); });
 $('#plan-form').addEventListener('submit', async (event) => { event.preventDefault(); const subjects = [...document.querySelectorAll('input[name=subject]:checked')].map((input)=>input.value); const selectedDays = [...document.querySelectorAll('input[name=day]:checked')].map((input)=>input.value); if(subjects.length < 1 || !selectedDays.length) return alert('Choose at least one subject and one study day.'); state.subjects=subjects; state.subjectsPerDay=Number($('#subjects-per-day').value); state.days=selectedDays; state.duration=Number($('#duration').value); state.breakMinutes=Number($('#break-minutes').value); state.startTime=$('#start-time').value; state.remindersEnabled=$('#study-reminders').checked; if (state.remindersEnabled) state.remindersEnabled = await requestNotificationPermission(); save(); closeModal($('#onboarding-modal')); render(); startReminderChecks(); });
 document.addEventListener('click',(event)=>{ const button=event.target.closest('.session-status'); if(button && !button.classList.contains('done')) openTimer(button); if(event.target.matches('[data-close]')) closeModal(event.target); if(event.target.matches('.nav-item')) show(event.target.dataset.view); });
+document.addEventListener('click',(event)=>{ const themeButton=event.target.closest('.theme-swatch'); if (!themeButton) return; const themeId=themeButton.dataset.themeId; if (unlockTheme(themeId)) { applyTheme(themeId); render(); show('profile'); } });
 $('#timer-toggle').addEventListener('click',()=>{ if(timerId){ clearInterval(timerId); timerId=null; $('#timer-toggle').innerHTML='Resume session <span>▶</span>'; } else { $('#timer-toggle').innerHTML='Pause session <span>Ⅱ</span>'; timerId=setInterval(()=>{ if(timerSeconds>0){timerSeconds--;updateTimer();} else { clearInterval(timerId); timerId=null; $('#timer-message').textContent='Time is up. Session complete!'; $('#timer-toggle').innerHTML='Finish session <span>✓</span>'; } },1000); } });
 $('#timer-complete').addEventListener('click', completeSession); $('#edit-plan').addEventListener('click',()=>openModal('#onboarding-modal')); $('#edit-plan-two').addEventListener('click',()=>openModal('#onboarding-modal')); $('#reset-button').addEventListener('click',()=>{ if(confirm('Clear your profile and start again?')){localStorage.removeItem(stateKey); location.reload();} });
 populateSubjects();
